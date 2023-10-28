@@ -1,2 +1,56 @@
-# random-bloom-filter
-Implementation of the bloom filter data structure, used to test whether an element is of a set. 
+Kirk Thelen
+Proj 1
+
+Please note that the SHA256 function has been found online as the specification allowed.
+I used the code found at http://www.zedwood.com/article/cpp-sha256-function
+
+Please navigate to the /source folder for the program files and Makefile.
+
+From the /source folder, the two executables RBFGen and IPCheck can be generated with:
+     make all
+They can be removed with
+     make clean
+     
+They can be tested as follows:
+     ./RBFGen <m>
+     	      e.g.: ./RBFGen 210455
+     ./IPCheck <file.txt> <ip address xxx.xxx.x.xxx>
+     	       e.g.: ./IPCheck RBFRow1.txt 192.168.2.222
+
+While the program checks for the correct number of inputs, it will not properly
+handle inputs of the wrong type (e.g., inputting a string for m), so please test
+it like the above.
+
+Thank you!
+
+--- QUESTIONS ---
+
+(a) If the false positive rate of the RBF should be less than 0.01%, please determine the
+minimum length of the used RBF m1. For an IP address, assume that it has 13 chars. For each
+RBF suppose that only one row is required to be stored. Each cell only requires 1 bit space.
+Please compute the space compression factor c1=(space cost using a list)/(space cost using an RBF)
+
+	k = 8, n = 10000, P = 0.0001
+	m = -kn/ln(1-P^(1/k))
+  	=> m = -8*10000/ln(1-0.0001^(1/8))
+  	=> m = 210454.09233
+  	=> m1 = 210455
+
+	space cost using a list = 13 chars * 10000 inputs = 130000 byte space
+	      	   	   	=> 130000 byte space * 8 = 1040000 bit space
+	space cost using RBF = 1 char * 210455 inputs = 210455 bit space
+	c1 = 1040000/210455 = 4.94167399206
+
+(b) If the false positive rate of the RBF should be less than 0.1%, please determine the
+minimum length of the used RBF m2 and the space compression factor c2.
+
+	k = 8, n = 10000, p = 0.001
+	m = -kn/ln(1-P^(1/k))
+	=> m = -8*10000/ln(1-0.001^(1/8))
+	=> m = 146076.97478
+	=> m2 = 146077
+
+	space cost using a list = 13 chars * 10000 inputs = 130000 bit space
+	      	   	   	=> 130000 byte space * 8 = 1040000 bit space
+	space cost using RBF = 1 char * 146077 inputs = 146077 bit space
+	c2 = 1040000/146077 = 7.11953284911
