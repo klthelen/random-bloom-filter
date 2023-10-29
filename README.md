@@ -1,34 +1,38 @@
-Kirk Thelen
-Proj 1
+# random-bloom-filter
 
 Please note that the SHA256 function has been found online as the specification allowed.
-I used the code found at http://www.zedwood.com/article/cpp-sha256-function
+The SHA256 code can be found at http://www.zedwood.com/article/cpp-sha256-function
 
-Please navigate to the /source folder for the program files and Makefile.
+From the /source folder, the two executables RBFGen and IPCheck can be compiled with:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`make all`<br/>
 
-From the /source folder, the two executables RBFGen and IPCheck can be generated with:
-     make all
-They can be removed with
-     make clean
-     
-They can be tested as follows:
-     ./RBFGen <m>
-     	      e.g.: ./RBFGen 210455
-     ./IPCheck <file.txt> <ip address xxx.xxx.x.xxx>
-     	       e.g.: ./IPCheck RBFRow1.txt 192.168.2.222
+All objects and binaries can be removed with: </br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`make clean`
+
+# Testing 
+
+You can test the program as follows:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./RBFGen <m>`
+     	   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./IPCheck <file.txt> <ip address xxx.xxx.x.xxx>`
+ 
+Where m is the calculated minimum length (i.e., column number) for the RBF using the formula m = -kn/ln(1-P^(1/k)) and file.txt is the generated RBF file from RBFGen.
+
+This implementation automatically assumes that all IP addresses in the form of 192.168.X.XXX are malicious (10,000 IP addresses). 
+
+The program will output `pass` if the IP address is not found in the bloom filter or `block` if it is found in the bloom filter (i.e., if it is an IP address in the form of 192.168.X.XXX). 
+
+# Example
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./RBFGen 210455`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./IPCheck RBFRow1.txt 192.168.2.222`
 
 While the program checks for the correct number of inputs, it will not properly
 handle inputs of the wrong type (e.g., inputting a string for m), so please test
 it like the above.
 
-Thank you!
+# Questions
 
---- QUESTIONS ---
-
-(a) If the false positive rate of the RBF should be less than 0.01%, please determine the
-minimum length of the used RBF m1. For an IP address, assume that it has 13 chars. For each
-RBF suppose that only one row is required to be stored. Each cell only requires 1 bit space.
-Please compute the space compression factor c1=(space cost using a list)/(space cost using an RBF)
+#### (a) If the false positive rate of the RBF should be less than 0.01%, please determine the minimum length of the used RBF m1. For an IP address, assume that it has 13 chars. For each RBF suppose that only one row is required to be stored. Each cell only requires 1 bit space. Please compute the space compression factor c1=(space cost using a list)/(space cost using an RBF)
 
 	k = 8, n = 10000, P = 0.0001
 	m = -kn/ln(1-P^(1/k))
@@ -41,8 +45,7 @@ Please compute the space compression factor c1=(space cost using a list)/(space 
 	space cost using RBF = 1 char * 210455 inputs = 210455 bit space
 	c1 = 1040000/210455 = 4.94167399206
 
-(b) If the false positive rate of the RBF should be less than 0.1%, please determine the
-minimum length of the used RBF m2 and the space compression factor c2.
+#### (b) If the false positive rate of the RBF should be less than 0.1%, please determine the minimum length of the used RBF m2 and the space compression factor c2.
 
 	k = 8, n = 10000, p = 0.001
 	m = -kn/ln(1-P^(1/k))
