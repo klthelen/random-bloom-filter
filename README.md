@@ -11,7 +11,7 @@ All objects and binaries can be removed with: </br>
 
 # Testing 
 
-You can test the program as follows:
+You can test the program as follows:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./RBFGen <m>`
      	   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./IPCheck <file.txt> <ip address xxx.xxx.x.xxx>`
@@ -23,8 +23,9 @@ This implementation automatically assumes that all IP addresses in the form of 1
 The program will output `pass` if the IP address is not found in the bloom filter or `block` if it is found in the bloom filter (i.e., if it is an IP address in the form of 192.168.X.XXX). 
 
 # Example
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./RBFGen 210455`
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./IPCheck RBFRow1.txt 192.168.2.222`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./RBFGen 210455`<br/>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`./IPCheck RBFRow1.txt 192.168.2.222`<br/>
 
 While the program checks for the correct number of inputs, it will not properly
 handle inputs of the wrong type (e.g., inputting a string for m), so please test
